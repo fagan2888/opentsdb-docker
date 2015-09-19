@@ -1,4 +1,5 @@
 FROM ubuntu
+MAINTAINER antonio@tradingeconomics.com
 
 #Install OpenTSDB and requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && \
