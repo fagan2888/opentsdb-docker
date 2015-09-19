@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo 'Starting OPENTSDB'
 
 echo 'OPENTSDB ZK SET TO' $HBASE_ZK
