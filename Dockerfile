@@ -1,11 +1,22 @@
 FROM ubuntu
 MAINTAINER antonio@tradingeconomics.com
 
-#Install OpenTSDB and requirements
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && \
-    apt-get install -y openjdk-6-jdk gnuplot nano && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# install requirements
+ENV DEBIAN_FRONTEND noninteractive
+RUN \
+  apt-get update && \
+  apt-get install -y python-software-properties software-properties-common curl nano
+
+# install java
+RUN \
+  echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java7-installer
+# ADD hbase-site.xml /etc/hbase/conf/hbase-site.xml
+
+ENV JAVA_HOME /usr
 
 ADD https://github.com/OpenTSDB/opentsdb/releases/download/v2.1.0RC1/opentsdb-2.1.0RC1_all.deb /tmp/opentsdb.deb
 RUN dpkg -i /tmp/opentsdb.deb
