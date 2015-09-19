@@ -1,9 +1,13 @@
 #!/bin/bash
 
-echo 'Starting OPENTSDB'
+echo 'STARTING OPENTSDB'
 
 echo 'OPENTSDB ZK SET TO' $HBASE_ZK
 
+echo 'WAIT A BIT FOR HBASE TO START'
+sleep 30
+
+echo 'LAUNCHING OPENTSDB'
 /usr/share/opentsdb/bin/tsdb tsd --zkquorum=$HBASE_ZK --auto-metric
 
 #echo 'Leave a loop scrip running'
