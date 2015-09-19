@@ -12,4 +12,5 @@ RUN rm /tmp/opentsdb.deb
 
 EXPOSE 4242
 
-CMD /usr/share/opentsdb/bin/tsdb tsd --zkquorum=$HBASE_ZK --auto-metric
+COPY start.sh start.sh
+CMD ["/bin/sh", "start.sh"]
