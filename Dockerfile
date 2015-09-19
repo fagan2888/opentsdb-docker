@@ -2,7 +2,7 @@ FROM ubuntu
 
 #Install OpenTSDB and requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update && \
-    apt-get install -y openjdk-6-jdk gnuplot && \
+    apt-get install -y openjdk-6-jdk gnuplot nano && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
