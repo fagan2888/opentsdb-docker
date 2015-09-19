@@ -1,13 +1,8 @@
-echo 'Starting HBASE'
-/opt/hbase/bin/start-hbase.sh
+echo 'Starting OPENTSDB'
 
-echo 'Waiting a bit for HBASE before creating TSDB Tables'
-sleep 10
+echo 'OPENTSDB ZK SET TO' $HBASE_ZK
 
-echo 'Begun creating TSDB tables'
-export HBASE_HOME=/opt/hbase
-export COMPRESSION=NONE
-curl -s https://raw.githubusercontent.com/OpenTSDB/opentsdb/master/src/create_table.sh | bash
+/usr/share/opentsdb/bin/tsdb tsd --zkquorum=$HBASE_ZK --auto-metric
 
 echo 'Leave a loop scrip running'
-/bin/sh -c "while true; do echo 'HBASE RUNNING'; /bin/date; sleep 1; done" 
+/bin/sh -c "while true; do echo 'OPENTSDB RUNNING'; /bin/date; sleep 1; done" 
