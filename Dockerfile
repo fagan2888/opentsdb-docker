@@ -14,7 +14,6 @@ RUN \
   add-apt-repository -y ppa:webupd8team/java && \
   apt-get update && \
   apt-get install -y oracle-java7-installer
-# ADD hbase-site.xml /etc/hbase/conf/hbase-site.xml
 
 ENV JAVA_HOME /usr
 
