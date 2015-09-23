@@ -17,14 +17,16 @@ RUN \
 
 ENV JAVA_HOME /usr
 
-ADD https://github.com/OpenTSDB/opentsdb/releases/download/v2.1.0RC1/opentsdb-2.1.0RC1_all.deb /tmp/opentsdb.deb
-RUN dpkg -i /tmp/opentsdb.deb
-RUN rm /tmp/opentsdb.deb
+ADD https://github.com/ieconomics/opentsdb/blob/next/opentsdb.deb?raw=true /opt/opentsdb.deb
+RUN dpkg -i /opt/opentsdb.deb
 
 # For nano to work properly
 ENV TERM=xterm
 
 EXPOSE 4242
 
-COPY start.sh start.sh
-CMD ["/bin/sh", "start.sh"]
+ADD start.sh /opt/start.sh
+ADD start-tsdb.sh /opt/start-tsdb.sh
+ADD create-tsdb-tables.sh /opt/create-tsdb-tables.sh
+
+CMD ["/bin/sh", "/opt/start.sh"]
